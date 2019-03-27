@@ -2,8 +2,10 @@ package pl.ee.deanery.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /*
     FieldOfStudyEntity - Nazwa wydziału
@@ -12,13 +14,15 @@ import javax.persistence.*;
 */
 
 @Data
-@Builder
+//@Builder
 @Entity
+@RequiredArgsConstructor
 public class FieldOfStudyEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
+  @NotNull
   @Column(unique = true, nullable = false)
   private String name;
 

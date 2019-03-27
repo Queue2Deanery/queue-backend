@@ -12,16 +12,16 @@ import java.util.List;
 public class FieldOfStudyController {
 
     @Autowired
-    private FieldOfStudyRepository fieldOfStudyRepository;
+    private FieldOfStudyRepository repository;
 
     @GetMapping("/list")
     public List<FieldOfStudyEntity> listOfFieldsOfStudy(){
-        return fieldOfStudyRepository.findAll();
+        return repository.findAll();
     }
 
     @PostMapping("/new")
     public FieldOfStudyEntity newFieldOfStudy(@RequestBody FieldOfStudyEntity entity){
-        return fieldOfStudyRepository.save(entity);
+        return repository.save(entity);
     }
 
 }

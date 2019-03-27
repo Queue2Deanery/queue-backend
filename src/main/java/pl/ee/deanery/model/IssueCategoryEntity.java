@@ -3,6 +3,7 @@ package pl.ee.deanery.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,9 +14,10 @@ import java.util.Set;
     Różne kategorie będą definiowane przez Dziekanat
  */
 
-@Builder
+//@Builder
 @Data
 @Entity
+@RequiredArgsConstructor
 public class IssueCategoryEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,10 +30,10 @@ public class IssueCategoryEntity {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueCategoryEntity")
   private Set<IssueEntity> issueEntities;
 
-  public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
+  /*public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setIssueCategoryEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
-  }
+  }*/
 
 }

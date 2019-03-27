@@ -2,6 +2,7 @@ package pl.ee.deanery.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,9 +12,10 @@ import java.time.LocalDateTime;
     Klasa opisująca studenta oczekującego w kolejce
  */
 
-@Builder
+//@Builder
 @Data
 @Entity
+@RequiredArgsConstructor
 public class IssueEntity {
 
   @Id

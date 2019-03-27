@@ -3,6 +3,7 @@ package pl.ee.deanery.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,9 +13,10 @@ import java.util.Set;
  */
 
 
-@Builder
+//@Builder
 @Data
 @Entity
+@RequiredArgsConstructor
 public class QueueEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,12 +31,12 @@ public class QueueEntity {
   @EqualsAndHashCode.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
   private Set<IssueEntity> issueEntities;
-
+/*
   public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setQueueEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
   }
-
+*/
 
 }
