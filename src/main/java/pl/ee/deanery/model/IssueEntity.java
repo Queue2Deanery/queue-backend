@@ -6,6 +6,11 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/*
+    IssueEntity - Sprawa do Dziekanatu
+    Klasa opisująca studenta oczekującego w kolejce
+ */
+
 @Builder
 @Data
 @Entity

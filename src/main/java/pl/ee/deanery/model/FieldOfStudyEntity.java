@@ -5,6 +5,12 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/*
+    FieldOfStudyEntity - Nazwa wydziału
+    np Eletrotechnika, AiR, Informatyka
+    Zawiera nazwę oraz kolejkę, do której będą zapisywać się studenci danego wydziału
+*/
+
 @Data
 @Builder
 @Entity

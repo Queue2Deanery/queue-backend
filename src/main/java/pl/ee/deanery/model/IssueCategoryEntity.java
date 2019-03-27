@@ -7,6 +7,12 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.util.Set;
 
+/*
+    IssueCategoryEntity - Kategoria sprawy
+    Kategoria sprawy wybierana przez każdego oczekującego w kolejce
+    Różne kategorie będą definiowane przez Dziekanat
+ */
+
 @Builder
 @Data
 @Entity
@@ -20,7 +26,7 @@ public class IssueCategoryEntity {
 
   @EqualsAndHashCode.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueCategoryEntity")
-  Set<IssueEntity> issueEntities;
+  private Set<IssueEntity> issueEntities;
 
   public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setIssueCategoryEntity(this);

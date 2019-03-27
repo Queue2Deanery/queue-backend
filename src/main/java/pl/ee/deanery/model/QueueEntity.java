@@ -7,6 +7,11 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.util.Set;
 
+/*
+    QueueEntity - Kolejka
+ */
+
+
 @Builder
 @Data
 @Entity
@@ -30,6 +35,6 @@ public class QueueEntity {
     issueEntities.add(issueEntity);
     return issueEntities;
   }
-  List.of
+
 
 }
