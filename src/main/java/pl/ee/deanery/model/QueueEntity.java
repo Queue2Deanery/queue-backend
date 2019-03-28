@@ -30,6 +30,5 @@ public class QueueEntity {
     issueEntities.add(issueEntity);
     return issueEntities;
   }
-  List.of
 
 }
