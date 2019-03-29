@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.ee.deanery.model.IssueCategoryEntity;
 import pl.ee.deanery.repository.IssueCategoryRepository;
+import pl.ee.deanery.service.IssueCategoryService;
 
 import java.util.List;
 
@@ -12,16 +13,16 @@ import java.util.List;
 public class IssueCategoryController {
 
     @Autowired
-    private IssueCategoryRepository repository;
+    private IssueCategoryService service;
 
     @GetMapping("/list")
     public List<IssueCategoryEntity> listOfIssueCategories(){
-        return repository.findAll();
+        return service.getAllIssueCategories();
     }
 
     @PostMapping("/new")
     public IssueCategoryEntity newIssueCategory(@RequestBody IssueCategoryEntity entity){
-        return repository.save(entity);
+        return service.addIssueCategory(entity);
     }
 
 }

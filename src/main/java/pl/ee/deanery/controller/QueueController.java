@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.ee.deanery.model.QueueEntity;
 import pl.ee.deanery.repository.QueueRepository;
+import pl.ee.deanery.service.QueueService;
 
 import java.util.List;
 
@@ -12,16 +13,16 @@ import java.util.List;
 public class QueueController {
 
     @Autowired
-    private QueueRepository repository;
+    private QueueService service;
 
     @GetMapping("/list")
     public List<QueueEntity> listOfQueues(){
-        return repository.findAll();
+        return service.getAllQueues();
     }
 
     @PostMapping("/new")
     public QueueEntity newQueue(@RequestBody QueueEntity entity){
-        return repository.save(entity);
+        return service.addQueue(entity);
     }
 
 }

@@ -27,11 +27,11 @@ public class QueueEntity {
 
   @Column(unique = true)
   private String shortName;
-
+/*
   @EqualsAndHashCode.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
   private Set<IssueEntity> issueEntities;
-/*
+
   public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setQueueEntity(this);
     issueEntities.add(issueEntity);

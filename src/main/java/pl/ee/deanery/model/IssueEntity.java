@@ -22,7 +22,7 @@ public class IssueEntity {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
-  @Builder.Default
+  //@Builder.Default
   @Column
   private  LocalDateTime createdAt = LocalDateTime.now();
 
@@ -32,13 +32,15 @@ public class IssueEntity {
   @Column
   private LocalDateTime completedAt;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fieldOfStudyID")
   private FieldOfStudyEntity fieldOfStudyEntity;
 
-  @ManyToOne
+  /*@ManyToOne
   private QueueEntity queueEntity;
-
-  @ManyToOne
+*/
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "issueCategoryID")
   private IssueCategoryEntity issueCategoryEntity;
 
   @Column(nullable = false)

@@ -29,7 +29,9 @@ public class FieldOfStudyEntity {
   @Column(unique = true)
   private String shortName;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
+  @NotNull
+  @JoinColumn(name = "queueID")
   private QueueEntity queueEntity;
 
 }

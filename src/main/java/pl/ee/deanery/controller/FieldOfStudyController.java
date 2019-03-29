@@ -3,7 +3,7 @@ package pl.ee.deanery.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.ee.deanery.model.FieldOfStudyEntity;
-import pl.ee.deanery.repository.FieldOfStudyRepository;
+import pl.ee.deanery.service.FieldOfStudyService;
 
 import java.util.List;
 
@@ -12,16 +12,17 @@ import java.util.List;
 public class FieldOfStudyController {
 
     @Autowired
-    private FieldOfStudyRepository repository;
+    private FieldOfStudyService service;
 
     @GetMapping("/list")
     public List<FieldOfStudyEntity> listOfFieldsOfStudy(){
-        return repository.findAll();
+        return service.getAllFieldsOfStudy();
     }
 
     @PostMapping("/new")
     public FieldOfStudyEntity newFieldOfStudy(@RequestBody FieldOfStudyEntity entity){
-        return repository.save(entity);
+        return service.addFieldOfStudy(entity);
     }
+
 
 }
