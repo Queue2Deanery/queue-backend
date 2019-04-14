@@ -21,4 +21,19 @@ public class IssueCategoryService {
     public List<IssueCategoryEntity> getAllIssueCategories(){
         return repository.findAll();
     }
+
+    public void deleteIssueCategory(Long id){
+        repository.deleteById(id);
+    }
+
+    public IssueCategoryEntity editIssueCategory(IssueCategoryEntity newIssueCategory, Long id){
+        return repository.findById(id)
+                .map(issueCategory -> {
+                    issueCategory.setName(newIssueCategory.getName());
+                    return repository.save(issueCategory);
+                }).orElseGet(() -> {
+                    newIssueCategory.setId(id);
+                    return repository.save(newIssueCategory);
+                });
+    }
 }

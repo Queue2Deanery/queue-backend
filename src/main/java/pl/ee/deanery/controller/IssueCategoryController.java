@@ -25,4 +25,15 @@ public class IssueCategoryController {
         return service.addIssueCategory(entity);
     }
 
+    @PutMapping("/edit/{id}")
+    public IssueCategoryEntity editIssueCategory(@RequestBody IssueCategoryEntity newIssueCategory,
+                                                 @PathVariable Long id){
+       return service.editIssueCategory(newIssueCategory, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteIssueCategory(@PathVariable Long id){
+        service.deleteIssueCategory(id);
+    }
+
 }
