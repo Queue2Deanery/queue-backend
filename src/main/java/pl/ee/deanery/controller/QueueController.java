@@ -25,4 +25,14 @@ public class QueueController {
         return service.addQueue(entity);
     }
 
+    @PutMapping("/edit/{id}")
+    public QueueEntity editQueue(@RequestBody QueueEntity newQueue,
+                                                 @PathVariable Long id){
+        return service.editQueue(newQueue, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteQueue(@PathVariable Long id){
+        service.deleteQueue(id);
+    }
 }

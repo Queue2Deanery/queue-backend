@@ -36,9 +36,9 @@ public class IssueEntity {
   @JoinColumn(name = "fieldOfStudyID")
   private FieldOfStudyEntity fieldOfStudyEntity;
 
-  /*@ManyToOne
+  @ManyToOne
   private QueueEntity queueEntity;
-*/
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "issueCategoryID")
   private IssueCategoryEntity issueCategoryEntity;

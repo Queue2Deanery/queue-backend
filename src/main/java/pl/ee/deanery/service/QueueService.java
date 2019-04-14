@@ -23,4 +23,20 @@ public class QueueService {
         return repository.findAll();
     }
 
+    public void deleteQueue(Long id){
+        repository.deleteById(id);
+    }
+
+    public QueueEntity editQueue(QueueEntity newQueue, Long id){
+        return repository.findById(id)
+                .map(queue -> {
+                    queue.setName(newQueue.getName());
+                    queue.setShortName(newQueue.getShortName());
+                    return repository.save(queue);
+                }).orElseGet(() -> {
+                    newQueue.setId(id);
+                    return repository.save(newQueue);
+                });
+    }
+
 }

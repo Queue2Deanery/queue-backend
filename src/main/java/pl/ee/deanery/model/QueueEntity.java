@@ -27,7 +27,7 @@ public class QueueEntity {
 
   @Column(unique = true)
   private String shortName;
-/*
+
   @EqualsAndHashCode.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
   private Set<IssueEntity> issueEntities;
@@ -37,6 +37,6 @@ public class QueueEntity {
     issueEntities.add(issueEntity);
     return issueEntities;
   }
-*/
+
 
 }

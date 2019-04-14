@@ -25,7 +25,7 @@ public class IssueCategoryEntity {
 
   @Column(unique = true, nullable = false)
   private String name;
-/*
+
   @EqualsAndHashCode.Exclude
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueCategoryEntity")
   private Set<IssueEntity> issueEntities;
@@ -34,6 +34,6 @@ public class IssueCategoryEntity {
     issueEntity.setIssueCategoryEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
-  }*/
+  }
 
 }
