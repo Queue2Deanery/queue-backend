@@ -33,15 +33,15 @@ public class IssueEntity {
   @Column
   private LocalDateTime completedAt;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "fieldOfStudyID")
   private FieldOfStudyEntity fieldOfStudyEntity;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "queueID")
   private QueueEntity queueEntity;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "issueCategoryID")
   private IssueCategoryEntity issueCategoryEntity;
 

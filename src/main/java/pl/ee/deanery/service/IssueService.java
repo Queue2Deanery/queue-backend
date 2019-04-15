@@ -4,6 +4,7 @@ package pl.ee.deanery.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.ee.deanery.model.IssueEntity;
+import pl.ee.deanery.model.QueueEntity;
 import pl.ee.deanery.repository.IssueRepository;
 import pl.ee.deanery.repository.QueueRepository;
 
@@ -26,7 +27,14 @@ public class IssueService {
                 .ifPresentOrElse(queue -> queue.addIssue(issue),
                         // todo custom exception
                         ()->new IllegalArgumentException("Error while adding an Issue - no Queue with specified id"));
-    */    return issueRepository.save(issue);
+    */
+        Long queueId = issue.getQueueEntity().getId();
+        QueueEntity queue = queueRepository.findById(queueId)
+                .orElseThrow(() -> new IllegalArgumentException("Queue not found >id: "+queueId));
+        issue.setQueueEntity(queue);
+        return issueRepository.save(issue);
+
+
     }
 
     public List<IssueEntity> getAllIssues(){
@@ -49,13 +57,13 @@ public class IssueService {
     public IssueEntity startIssue(Long id){
         IssueEntity issue = getIssue(id);
         issue.setStartedAt(LocalDateTime.now());
-        return issue;
+        return issueRepository.save(issue);
     }
 
     public IssueEntity completeIssue(Long id){
         IssueEntity issue = getIssue(id);
         issue.setCompletedAt(LocalDateTime.now());
-        return issue;
+        return issueRepository.save(issue);
     }
 
 

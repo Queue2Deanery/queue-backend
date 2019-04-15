@@ -1,5 +1,6 @@
 package pl.ee.deanery.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,7 @@ public class IssueCategoryEntity {
   private String name;
 
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueCategoryEntity")
   private Set<IssueEntity> issueEntities;
 
