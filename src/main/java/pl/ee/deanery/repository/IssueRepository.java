@@ -6,4 +6,5 @@ import pl.ee.deanery.model.IssueEntity;
 
 @Repository
 public interface IssueRepository extends JpaRepository<IssueEntity, Long> {
+    IssueEntity findByQueueEntityId(Long id);
 }

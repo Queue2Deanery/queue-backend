@@ -25,5 +25,24 @@ public class IssueController {
         return service.addIssue(entity);
     }
 
+    @PutMapping("/bind/{issueId}/queue/{queueId}")
+    public void bindIssueToQueue(@PathVariable Long issueId, @PathVariable Long queueId){
+        service.addToQueue(issueId, queueId);
+    }
+
+    @GetMapping("/{id}")
+    public IssueEntity getIssue(@PathVariable Long id){
+        return service.getIssue(id);
+    }
+
+    @PutMapping("/start/{id}")
+    public IssueEntity startIssue(@PathVariable Long id){
+        return service.startIssue(id);
+    }
+
+    @PutMapping("complete/{id}")
+    public IssueEntity completeIssue(@PathVariable Long id){
+        return service.completeIssue(id);
+    }
 
 }

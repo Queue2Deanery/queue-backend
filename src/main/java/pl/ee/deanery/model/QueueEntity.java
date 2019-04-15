@@ -1,5 +1,6 @@
 package pl.ee.deanery.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,11 +33,11 @@ public class QueueEntity {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
   private Set<IssueEntity> issueEntities;
 
-  public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
+  /*public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setQueueEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
-  }
+  }*/
 
 
 }

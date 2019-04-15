@@ -36,4 +36,9 @@ public class IssueCategoryController {
         service.deleteIssueCategory(id);
     }
 
+    @GetMapping("/{id}")
+    public IssueCategoryEntity getIssueCategory(@PathVariable Long id){
+        return service.getIssueCategory(id);
+    }
+
 }

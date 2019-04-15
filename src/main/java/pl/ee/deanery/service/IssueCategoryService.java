@@ -36,4 +36,9 @@ public class IssueCategoryService {
                     return repository.save(newIssueCategory);
                 });
     }
+
+    public IssueCategoryEntity getIssueCategory(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No IssueCategory found >id: "+id));
+    }
 }

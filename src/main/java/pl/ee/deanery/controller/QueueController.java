@@ -35,4 +35,9 @@ public class QueueController {
     public void deleteQueue(@PathVariable Long id){
         service.deleteQueue(id);
     }
+
+    @GetMapping("/{id}")
+    public QueueEntity getQueue(@PathVariable Long id){
+        return service.getQueueById(id);
+    }
 }

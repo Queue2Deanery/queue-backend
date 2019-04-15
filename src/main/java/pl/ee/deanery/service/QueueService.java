@@ -39,4 +39,9 @@ public class QueueService {
                 });
     }
 
+    public QueueEntity getQueueById(Long id){
+        return repository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Queue not found >id"+id));
+    }
+
 }

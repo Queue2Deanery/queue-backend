@@ -1,5 +1,6 @@
 package pl.ee.deanery.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,8 @@ public class IssueEntity {
   @JoinColumn(name = "fieldOfStudyID")
   private FieldOfStudyEntity fieldOfStudyEntity;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "queueID")
   private QueueEntity queueEntity;
 
   @ManyToOne(fetch = FetchType.LAZY)
