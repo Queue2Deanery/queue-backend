@@ -3,10 +3,7 @@ package pl.ee.deanery.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,10 +13,12 @@ import java.util.Set;
  */
 
 
-//@Builder
+@Builder
 @Data
 @Entity
 @RequiredArgsConstructor
+@AllArgsConstructor
+//@NoArgsConstructor
 public class QueueEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)

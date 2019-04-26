@@ -1,9 +1,7 @@
 package pl.ee.deanery.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,17 +11,19 @@ import java.time.LocalDateTime;
     Klasa opisująca studenta oczekującego w kolejce
  */
 
-//@Builder
+@Builder
 @Data
 @Entity
 @RequiredArgsConstructor
+//@NoArgsConstructor
+@AllArgsConstructor
 public class IssueEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
-  //@Builder.Default
+  @Builder.Default
   @Column
   private  LocalDateTime createdAt = LocalDateTime.now();
 

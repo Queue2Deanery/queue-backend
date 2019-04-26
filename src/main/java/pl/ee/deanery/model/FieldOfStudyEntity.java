@@ -1,8 +1,6 @@
 package pl.ee.deanery.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,9 +12,10 @@ import javax.validation.constraints.NotNull;
 */
 
 @Data
-//@Builder
+@Builder
 @Entity
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class FieldOfStudyEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)

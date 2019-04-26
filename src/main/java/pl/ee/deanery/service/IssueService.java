@@ -10,8 +10,6 @@ import pl.ee.deanery.repository.QueueRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class IssueService {
