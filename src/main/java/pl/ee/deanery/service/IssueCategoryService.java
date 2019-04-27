@@ -29,7 +29,10 @@ public class IssueCategoryService {
     public IssueCategoryEntity editIssueCategory(IssueCategoryEntity newIssueCategory, Long id){
         return repository.findById(id)
                 .map(issueCategory -> {
-                    issueCategory.setName(newIssueCategory.getName());
+                    if(newIssueCategory.getName() != null)
+                        issueCategory.setName(newIssueCategory.getName());
+                    if(newIssueCategory.getIssueEntities() != null)
+                        issueCategory.setIssueEntities(newIssueCategory.getIssueEntities());
                     return repository.save(issueCategory);
                 }).orElseGet(() -> {
                     newIssueCategory.setId(id);
@@ -39,6 +42,6 @@ public class IssueCategoryService {
 
     public IssueCategoryEntity getIssueCategory(Long id){
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No IssueCategory found >id: "+id));
+                .orElseThrow(() -> new IllegalArgumentException("No IssueCategory found with id: "+id));
     }
 }

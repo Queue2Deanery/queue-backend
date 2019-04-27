@@ -49,7 +49,7 @@ public class FieldOfStudyController {
 
     @GetMapping("/{id}")
     public FieldOfStudyDTO getFieldOfStudy(@PathVariable Long id){
-        return mapper.toFieldOfStudyDTO(service.getFieldOfStudyById(id));
+        return mapper.toFieldOfStudyDTO(service.getFieldOfStudy(id));
     }
 
 }

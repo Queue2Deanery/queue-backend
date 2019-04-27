@@ -21,10 +21,10 @@ import static org.junit.Assert.assertNotNull;
 public class FieldOfStudyMappingTest {
 
         @MockBean
-        QueueService queueService;
+        private QueueService queueService;
 
         @Autowired
-        FieldOfStudyMapper mapper;
+        private FieldOfStudyMapper mapper;
 
         @Test
         public void entityToDTO(){
@@ -70,7 +70,7 @@ public class FieldOfStudyMappingTest {
                     .build();
 
 
-            Mockito.when(queueService.getQueueById(2L)).thenReturn(queueFromDb);
+            Mockito.when(queueService.getQueue(2L)).thenReturn(queueFromDb);
             FieldOfStudyEntity entity = mapper.toFieldOfStudyEntity(dto);
 
 

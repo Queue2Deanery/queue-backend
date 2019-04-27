@@ -18,7 +18,7 @@ public abstract class FieldOfStudyMapper {
     @Mapping(target="queueId", source="queueEntity.id")
     public abstract FieldOfStudyDTO toFieldOfStudyDTO(FieldOfStudyEntity entity);
 
-    @Mapping(target = "queueEntity", expression = "java(queueService.getQueueById(dto.getQueueId()))")
+    @Mapping(target = "queueEntity", expression = "java(queueService.getQueue(dto.getQueueId()))")
     public abstract FieldOfStudyEntity toFieldOfStudyEntity(FieldOfStudyDTO dto);
 
 }

@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 //@NoArgsConstructor
 public class IssueDTO {
     private Long id;
-    private  LocalDateTime createdAt;
+    private LocalDateTime createdAt;
     private LocalDateTime startedAt;
     private LocalDateTime completedAt;
-    private Long fieldOfStudyEntityId;
-    private Long queueEntityId;
-    private Long issueCategoryEntityId;
+    private Long fieldOfStudyId;
+    private Long queueId;
+    private Long issueCategoryId;
     private String studentIndex;
     private String studentComment;
 }

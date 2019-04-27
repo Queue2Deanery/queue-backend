@@ -14,16 +14,16 @@ public class FieldOfStudyService {
     @Autowired
     private FieldOfStudyRepository repository;
 
-    public FieldOfStudyEntity addFieldOfStudy(FieldOfStudyEntity fieldOfStudy){
-        return repository.save(fieldOfStudy);
+    public void addFieldOfStudy(FieldOfStudyEntity fieldOfStudy){
+        repository.save(fieldOfStudy);
     }
 
     public List<FieldOfStudyEntity> getAllFieldsOfStudy(){
         return repository.findAll();
     }
 
-    public FieldOfStudyEntity editFieldOfStudy(FieldOfStudyEntity updatedEntity, Long id){
-        return repository.findById(id)
+    public void editFieldOfStudy(FieldOfStudyEntity updatedEntity, Long id){
+        repository.findById(id)
                 .map(oldFieldOfStudy -> {
 
                     if(updatedEntity.getName() != null)
@@ -44,7 +44,7 @@ public class FieldOfStudyService {
         repository.deleteById(id);
     }
 
-    public FieldOfStudyEntity getFieldOfStudyById(Long id){
+    public FieldOfStudyEntity getFieldOfStudy(Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No FieldOfStudy found with id: "+id));
     }

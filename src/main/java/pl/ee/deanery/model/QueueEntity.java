@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -31,9 +32,9 @@ public class QueueEntity {
   private String shortName;
 
   @EqualsAndHashCode.Exclude
-  @JsonIgnore
+  //@JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
-  private Set<IssueEntity> issueEntities;
+  private List<IssueEntity> issueEntities;
 
   /*public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setQueueEntity(this);

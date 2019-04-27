@@ -1,12 +1,16 @@
 package pl.ee.deanery.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.ee.deanery.dto.QueueDTO;
+import pl.ee.deanery.mapper.QueueMapper;
 import pl.ee.deanery.model.QueueEntity;
-import pl.ee.deanery.repository.QueueRepository;
 import pl.ee.deanery.service.QueueService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/queue")
@@ -15,29 +19,37 @@ public class QueueController {
     @Autowired
     private QueueService service;
 
+    @Autowired
+    private QueueMapper mapper;
+
     @GetMapping("/list")
-    public List<QueueEntity> listOfQueues(){
-        return service.getAllQueues();
+    public List<QueueDTO> listOfQueues(){
+        return service.getAllQueues().stream()
+                .map(queue -> mapper.toQueueDTO(queue))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/new")
-    public QueueEntity newQueue(@RequestBody QueueEntity entity){
-        return service.addQueue(entity);
+    public ResponseEntity newQueue(@RequestBody QueueEntity entity){
+        service.addQueue(entity);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("/edit/{id}")
-    public QueueEntity editQueue(@RequestBody QueueEntity newQueue,
+    public ResponseEntity editQueue(@RequestBody QueueDTO newQueue,
                                                  @PathVariable Long id){
-        return service.editQueue(newQueue, id);
+        service.editQueue(mapper.toQueueEntity(newQueue), id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteQueue(@PathVariable Long id){
+    public ResponseEntity deleteQueue(@PathVariable Long id){
         service.deleteQueue(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
-    public QueueEntity getQueue(@PathVariable Long id){
-        return service.getQueueById(id);
+    public QueueDTO getQueue(@PathVariable Long id){
+        return mapper.toQueueDTO(service.getQueue(id));
     }
 }

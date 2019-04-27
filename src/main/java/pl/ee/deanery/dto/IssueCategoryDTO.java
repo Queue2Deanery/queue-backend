@@ -12,5 +12,5 @@ import java.util.List;
 public class IssueCategoryDTO {
     private Long id;
     private String name;
-    private List<Long> issueEntitiesIds;
+    private List<Long> issueEntitiesIds; // przy dłuższym czasie działania może być bardzo długa
 }

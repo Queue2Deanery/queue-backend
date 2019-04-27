@@ -20,7 +20,7 @@ public class IssueService {
     @Autowired
     private QueueRepository queueRepository;
 
-    public IssueEntity addIssue(IssueEntity issue){
+    public void addIssue(IssueEntity issue){
         /*queueRepository.findById(issue.getQueueEntity().getId())
                 .ifPresentOrElse(queue -> queue.addIssue(issue),
                         // todo custom exception
@@ -30,9 +30,7 @@ public class IssueService {
         QueueEntity queue = queueRepository.findById(queueId)
                 .orElseThrow(() -> new IllegalArgumentException("Queue not found >id: "+queueId));
         issue.setQueueEntity(queue);
-        return issueRepository.save(issue);
-
-
+        issueRepository.save(issue);
     }
 
     public List<IssueEntity> getAllIssues(){
@@ -48,20 +46,22 @@ public class IssueService {
     }
 
     public IssueEntity getIssue(Long id){
+        if(id == null)
+            return null;
         return issueRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No Issue found >id: "+id));
+                .orElseThrow(() -> new IllegalArgumentException("No Issue found with id: "+id));
     }
 
-    public IssueEntity startIssue(Long id){
+    public void startIssue(Long id){
         IssueEntity issue = getIssue(id);
         issue.setStartedAt(LocalDateTime.now());
-        return issueRepository.save(issue);
+        issueRepository.save(issue);
     }
 
-    public IssueEntity completeIssue(Long id){
+    public void completeIssue(Long id){
         IssueEntity issue = getIssue(id);
         issue.setCompletedAt(LocalDateTime.now());
-        return issueRepository.save(issue);
+        issueRepository.save(issue);
     }
 
 

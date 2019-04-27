@@ -15,8 +15,8 @@ public class QueueService {
     @Autowired
     private QueueRepository repository;
 
-    public QueueEntity addQueue(QueueEntity queue){
-        return repository.save(queue);
+    public void addQueue(QueueEntity queue){
+        repository.save(queue);
     }
 
     public List<QueueEntity> getAllQueues(){
@@ -27,11 +27,15 @@ public class QueueService {
         repository.deleteById(id);
     }
 
-    public QueueEntity editQueue(QueueEntity newQueue, Long id){
-        return repository.findById(id)
+    public void editQueue(QueueEntity newQueue, Long id){
+        repository.findById(id)
                 .map(queue -> {
-                    queue.setName(newQueue.getName());
-                    queue.setShortName(newQueue.getShortName());
+                    if(newQueue.getName() != null)
+                        queue.setName(newQueue.getName());
+                    if(newQueue.getShortName() != null)
+                        queue.setShortName(newQueue.getShortName());
+                    if(newQueue.getIssueEntities() != null)
+                        queue.setIssueEntities(newQueue.getIssueEntities());
                     return repository.save(queue);
                 }).orElseGet(() -> {
                     newQueue.setId(id);
@@ -39,11 +43,11 @@ public class QueueService {
                 });
     }
 
-    public QueueEntity getQueueById(Long id){
+    public QueueEntity getQueue(Long id){
         if(id == null)
             return null;
         return repository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Queue not found >id"+id));
+                .orElseThrow(()->new IllegalArgumentException("No Queue found with id: "+id));
     }
 
 }
