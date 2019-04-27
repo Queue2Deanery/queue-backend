@@ -40,6 +40,8 @@ public class QueueService {
     }
 
     public QueueEntity getQueueById(Long id){
+        if(id == null)
+            return null;
         return repository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("Queue not found >id"+id));
     }

@@ -25,11 +25,6 @@ public class IssueController {
         return service.addIssue(entity);
     }
 
-    @PutMapping("/bind/{issueId}/queue/{queueId}")
-    public void bindIssueToQueue(@PathVariable Long issueId, @PathVariable Long queueId){
-        service.addToQueue(issueId, queueId);
-    }
-
     @GetMapping("/{id}")
     public IssueEntity getIssue(@PathVariable Long id){
         return service.getIssue(id);

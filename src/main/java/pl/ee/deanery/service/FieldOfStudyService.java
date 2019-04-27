@@ -22,4 +22,31 @@ public class FieldOfStudyService {
         return repository.findAll();
     }
 
+    public FieldOfStudyEntity editFieldOfStudy(FieldOfStudyEntity updatedEntity, Long id){
+        return repository.findById(id)
+                .map(oldFieldOfStudy -> {
+
+                    if(updatedEntity.getName() != null)
+                        oldFieldOfStudy.setName(updatedEntity.getName());
+                    if(updatedEntity.getShortName() != null)
+                        oldFieldOfStudy.setShortName(updatedEntity.getShortName());
+                    if(updatedEntity.getQueueEntity() != null)
+                        oldFieldOfStudy.setQueueEntity(updatedEntity.getQueueEntity());
+
+                    return repository.save(oldFieldOfStudy);
+                }).orElseGet(() -> {
+                    updatedEntity.setId(id);
+                    return repository.save(updatedEntity);
+                });
+    }
+
+    public void deleteFieldOfStudy(Long id){
+        repository.deleteById(id);
+    }
+
+    public FieldOfStudyEntity getFieldOfStudyById(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No FieldOfStudy found with id: "+id));
+    }
+
 }
