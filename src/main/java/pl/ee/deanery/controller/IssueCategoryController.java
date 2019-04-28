@@ -24,6 +24,12 @@ public class IssueCategoryController {
     @Autowired
     private IssueCategoryMapper mapper;
 
+    @PostMapping("/new")
+    public ResponseEntity<Map<String, Long>> newIssueCategory(@RequestBody IssueCategoryDTO dto){
+        Long id = service.addIssueCategory(mapper.toIssueCategoryEntity(dto));
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public List<IssueCategoryDTO> listOfIssueCategories(){
         return service.getAllIssueCategories().stream()
@@ -31,10 +37,9 @@ public class IssueCategoryController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Map<String, Long>> newIssueCategory(@RequestBody IssueCategoryDTO dto){
-        Long id = service.addIssueCategory(mapper.toIssueCategoryEntity(dto));
-        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public IssueCategoryDTO getIssueCategory(@PathVariable Long id){
+        return mapper.toIssueCategoryDTO(service.getIssueCategory(id));
     }
 
     @PutMapping("/edit/{id}")
@@ -49,12 +54,5 @@ public class IssueCategoryController {
         service.deleteIssueCategory(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/{id}")
-    public IssueCategoryDTO getIssueCategory(@PathVariable Long id){
-        return mapper.toIssueCategoryDTO(service.getIssueCategory(id));
-    }
-
-
 
 }

@@ -23,6 +23,12 @@ public class QueueController {
     @Autowired
     private QueueMapper mapper;
 
+    @PostMapping("/new")
+    public ResponseEntity<Map<String, Long>> newQueue(@RequestBody QueueEntity entity){
+        Long id = service.addQueue(entity);
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public List<QueueDTO> listOfQueues(){
         return service.getAllQueues().stream()
@@ -30,10 +36,9 @@ public class QueueController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Map<String, Long>> newQueue(@RequestBody QueueEntity entity){
-        Long id = service.addQueue(entity);
-        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public QueueDTO getQueue(@PathVariable Long id){
+        return mapper.toQueueDTO(service.getQueue(id));
     }
 
     @PutMapping("/edit/{id}")
@@ -49,8 +54,5 @@ public class QueueController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{id}")
-    public QueueDTO getQueue(@PathVariable Long id){
-        return mapper.toQueueDTO(service.getQueue(id));
-    }
+
 }

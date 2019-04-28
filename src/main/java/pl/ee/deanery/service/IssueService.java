@@ -17,9 +17,6 @@ public class IssueService {
     @Autowired
     private IssueRepository issueRepository;
 
-    @Autowired
-    private QueueRepository queueRepository;
-
     public Long addIssue(IssueEntity issue){
         /*queueRepository.findById(issue.getQueueEntity().getId())
                 .ifPresentOrElse(queue -> queue.addIssue(issue),
@@ -50,6 +47,24 @@ public class IssueService {
             return null;
         return issueRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No Issue found with id: "+id));
+    }
+
+    public void deleteIssue(Long id){
+        issueRepository.deleteById(id);
+    }
+
+    public void editIssue(IssueEntity newIssue, Long id){
+        issueRepository.findById(id)
+                .map(issue -> {
+                    if(newIssue.getStudentComment() != null)
+                        issue.setStudentComment(newIssue.getStudentComment());
+                    if(newIssue.getStudentIndex() != null)
+                        issue.setStudentIndex(newIssue.getStudentIndex());
+                    return issueRepository.save(issue);
+                }).orElseGet(() -> {
+                    newIssue.setId(id);
+                    return issueRepository.save(newIssue);
+        });
     }
 
     public List<IssueEntity> getAllWaiting(){

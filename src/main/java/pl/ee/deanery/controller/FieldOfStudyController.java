@@ -22,6 +22,12 @@ public class FieldOfStudyController {
     @Autowired
     private FieldOfStudyMapper mapper;
 
+    @PostMapping("/new")
+    public ResponseEntity<Map<String, Long>> newFieldOfStudy(@RequestBody FieldOfStudyDTO dto){
+        Long id = service.addFieldOfStudy(mapper.toFieldOfStudyEntity(dto));
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public List<FieldOfStudyDTO> listOfFieldsOfStudy(){
 
@@ -30,10 +36,9 @@ public class FieldOfStudyController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<Map<String, Long>> newFieldOfStudy(@RequestBody FieldOfStudyDTO dto){
-        Long id = service.addFieldOfStudy(mapper.toFieldOfStudyEntity(dto));
-        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public FieldOfStudyDTO getFieldOfStudy(@PathVariable Long id){
+        return mapper.toFieldOfStudyDTO(service.getFieldOfStudy(id));
     }
 
     @PutMapping("/edit/{id}")
@@ -47,10 +52,4 @@ public class FieldOfStudyController {
         service.deleteFieldOfStudy(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/{id}")
-    public FieldOfStudyDTO getFieldOfStudy(@PathVariable Long id){
-        return mapper.toFieldOfStudyDTO(service.getFieldOfStudy(id));
-    }
-
 }

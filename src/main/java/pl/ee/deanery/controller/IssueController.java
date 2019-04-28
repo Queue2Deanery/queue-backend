@@ -50,6 +50,12 @@ public class IssueController {
                 .collect(Collectors.toList());
     }
 
+    @PutMapping("/edit/{id}")
+    public ResponseEntity editIssue(@RequestBody IssueDTO dto, @PathVariable Long id){
+        service.editIssue(mapper.toIssueEntity(dto), id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
     @PutMapping("/start/{id}")
     public ResponseEntity startIssue(@PathVariable Long id){
         service.startIssue(id);
@@ -59,6 +65,12 @@ public class IssueController {
     @PutMapping("complete/{id}")
     public ResponseEntity completeIssue(@PathVariable Long id){
         service.completeIssue(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity deleteIssue(@PathVariable Long id){
+        service.deleteIssue(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

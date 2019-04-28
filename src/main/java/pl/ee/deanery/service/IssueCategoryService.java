@@ -26,8 +26,8 @@ public class IssueCategoryService {
         repository.deleteById(id);
     }
 
-    public IssueCategoryEntity editIssueCategory(IssueCategoryEntity newIssueCategory, Long id){
-        return repository.findById(id)
+    public void editIssueCategory(IssueCategoryEntity newIssueCategory, Long id){
+        repository.findById(id)
                 .map(issueCategory -> {
                     if(newIssueCategory.getName() != null)
                         issueCategory.setName(newIssueCategory.getName());
