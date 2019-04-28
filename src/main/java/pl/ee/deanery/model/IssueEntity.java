@@ -33,10 +33,11 @@ public class IssueEntity {
   @Column
   private LocalDateTime completedAt;
 
-  @ManyToOne
+  /*@ManyToOne
   @JoinColumn(name = "fieldOfStudyID")
-  private FieldOfStudyEntity fieldOfStudyEntity;
+  private FieldOfStudyEntity fieldOfStudyEntity; // queueId już jednoznacznie łączy z fieldOfStudyId
 
+*/
   @ManyToOne
   @JoinColumn(name = "queueID")
   private QueueEntity queueEntity;

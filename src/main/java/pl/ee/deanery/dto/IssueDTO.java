@@ -14,7 +14,7 @@ public class IssueDTO {
     private LocalDateTime createdAt;
     private LocalDateTime startedAt;
     private LocalDateTime completedAt;
-    private Long fieldOfStudyId;
+    //private Long fieldOfStudyId; // queueId już jednoznacznie łączy z fieldOfStudyId
     private Long queueId;
     private Long issueCategoryId;
     private String studentIndex;

@@ -12,6 +12,7 @@ import pl.ee.deanery.service.IssueService;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,6 +25,12 @@ public class IssueController {
     @Autowired
     private IssueMapper mapper;
 
+    @PostMapping("/new")
+    public ResponseEntity<Map<String, Long>> newIssue(@RequestBody IssueDTO dto){
+        Long id = service.addIssue(mapper.toIssueEntity(dto));
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public List<IssueDTO> listOfIssues(){
         return service.getAllIssues().stream()
@@ -31,15 +38,16 @@ public class IssueController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/new")
-    public ResponseEntity newIssue(@RequestBody IssueDTO dto){
-        service.addIssue(mapper.toIssueEntity(dto));
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-
     @GetMapping("/{id}")
     public IssueDTO getIssue(@PathVariable Long id){
         return mapper.toIssueDTO(service.getIssue(id));
+    }
+
+    @GetMapping("/waiting")
+    public List<IssueDTO> getAllIssuesWaiting(){
+        return service.getAllWaiting().stream()
+                .map(issue -> mapper.toIssueDTO(issue))
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/start/{id}")

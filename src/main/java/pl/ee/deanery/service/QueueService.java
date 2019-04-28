@@ -15,8 +15,8 @@ public class QueueService {
     @Autowired
     private QueueRepository repository;
 
-    public void addQueue(QueueEntity queue){
-        repository.save(queue);
+    public Long addQueue(QueueEntity queue){
+        return repository.save(queue).getId();
     }
 
     public List<QueueEntity> getAllQueues(){

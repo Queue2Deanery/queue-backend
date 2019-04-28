@@ -17,10 +17,11 @@ public abstract class QueueMapper {
     @Autowired
     protected IssueService issueService;
 
-    @Mapping(target="issueEntities", expression = "java(mapIdsToEntitiesList(dto.getIssueIds()))")
+    @Mapping(target="issueEntities", //expression = "java(mapIdsToEntitiesList(dto.getIssueIds()))")
+            ignore = true)
     public abstract QueueEntity toQueueEntity(QueueDTO dto);
 
-    @Mapping(target="issueIds", expression = "java(mapEntitiesToIdsList(entity.getIssueEntities()))")
+    //@Mapping(target="issueIds", expression = "java(mapEntitiesToIdsList(entity.getIssueEntities()))")
     public abstract QueueDTO toQueueDTO(QueueEntity entity);
 
     protected List<IssueEntity> mapIdsToEntitiesList(List<Long> idsList){

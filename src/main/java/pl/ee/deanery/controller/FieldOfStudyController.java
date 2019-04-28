@@ -9,6 +9,7 @@ import pl.ee.deanery.mapper.FieldOfStudyMapper;
 import pl.ee.deanery.service.FieldOfStudyService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,9 +31,9 @@ public class FieldOfStudyController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity newFieldOfStudy(@RequestBody FieldOfStudyDTO dto){
-        service.addFieldOfStudy(mapper.toFieldOfStudyEntity(dto));
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity<Map<String, Long>> newFieldOfStudy(@RequestBody FieldOfStudyDTO dto){
+        Long id = service.addFieldOfStudy(mapper.toFieldOfStudyEntity(dto));
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
     }
 
     @PutMapping("/edit/{id}")

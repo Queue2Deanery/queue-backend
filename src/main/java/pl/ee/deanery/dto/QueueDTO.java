@@ -13,5 +13,5 @@ public class QueueDTO {
     private Long id;
     private String name;
     private String shortName;
-    private List<Long> issueIds;
+    //private List<Long> issueIds; // przy dłuższym czasie działania może być bardzo długa
 }

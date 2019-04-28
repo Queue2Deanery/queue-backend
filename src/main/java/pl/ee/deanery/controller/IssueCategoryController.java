@@ -1,12 +1,18 @@
 package pl.ee.deanery.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.ee.deanery.dto.IssueCategoryDTO;
+import pl.ee.deanery.mapper.IssueCategoryMapper;
 import pl.ee.deanery.model.IssueCategoryEntity;
 import pl.ee.deanery.repository.IssueCategoryRepository;
 import pl.ee.deanery.service.IssueCategoryService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/issue-category")
@@ -15,30 +21,40 @@ public class IssueCategoryController {
     @Autowired
     private IssueCategoryService service;
 
+    @Autowired
+    private IssueCategoryMapper mapper;
+
     @GetMapping("/list")
-    public List<IssueCategoryEntity> listOfIssueCategories(){
-        return service.getAllIssueCategories();
+    public List<IssueCategoryDTO> listOfIssueCategories(){
+        return service.getAllIssueCategories().stream()
+                .map(issueCategory -> mapper.toIssueCategoryDTO(issueCategory))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/new")
-    public IssueCategoryEntity newIssueCategory(@RequestBody IssueCategoryEntity entity){
-        return service.addIssueCategory(entity);
+    public ResponseEntity<Map<String, Long>> newIssueCategory(@RequestBody IssueCategoryDTO dto){
+        Long id = service.addIssueCategory(mapper.toIssueCategoryEntity(dto));
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
     }
 
     @PutMapping("/edit/{id}")
-    public IssueCategoryEntity editIssueCategory(@RequestBody IssueCategoryEntity newIssueCategory,
+    public ResponseEntity editIssueCategory(@RequestBody IssueCategoryDTO dto,
                                                  @PathVariable Long id){
-       return service.editIssueCategory(newIssueCategory, id);
+       service.editIssueCategory(mapper.toIssueCategoryEntity(dto), id);
+       return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteIssueCategory(@PathVariable Long id){
+    public ResponseEntity deleteIssueCategory(@PathVariable Long id){
         service.deleteIssueCategory(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{id}")
-    public IssueCategoryEntity getIssueCategory(@PathVariable Long id){
-        return service.getIssueCategory(id);
+    public IssueCategoryDTO getIssueCategory(@PathVariable Long id){
+        return mapper.toIssueCategoryDTO(service.getIssueCategory(id));
     }
+
+
 
 }

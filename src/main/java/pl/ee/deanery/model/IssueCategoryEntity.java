@@ -28,14 +28,14 @@ public class IssueCategoryEntity {
   private String name;
 
   @EqualsAndHashCode.Exclude
-  @JsonIgnore
+  //@JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "issueCategoryEntity")
   private Set<IssueEntity> issueEntities;
 
-  public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
+  /*public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setIssueCategoryEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
-  }
+  }*/
 
 }

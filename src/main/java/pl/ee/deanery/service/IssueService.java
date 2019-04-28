@@ -20,36 +20,40 @@ public class IssueService {
     @Autowired
     private QueueRepository queueRepository;
 
-    public void addIssue(IssueEntity issue){
+    public Long addIssue(IssueEntity issue){
         /*queueRepository.findById(issue.getQueueEntity().getId())
                 .ifPresentOrElse(queue -> queue.addIssue(issue),
                         // todo custom exception
                         ()->new IllegalArgumentException("Error while adding an Issue - no Queue with specified id"));
     */
-        Long queueId = issue.getQueueEntity().getId();
+        /*Long queueId = issue.getQueueEntity().getId();
         QueueEntity queue = queueRepository.findById(queueId)
                 .orElseThrow(() -> new IllegalArgumentException("Queue not found >id: "+queueId));
-        issue.setQueueEntity(queue);
-        issueRepository.save(issue);
+        issue.setQueueEntity(queue);*/
+        return issueRepository.save(issue).getId();
     }
 
     public List<IssueEntity> getAllIssues(){
         return issueRepository.findAll();
     }
 
-    public void addToQueue(Long issueId, Long queueId){
+    /*public void addToQueue(Long issueId, Long queueId){
         queueRepository.findById(queueId).ifPresentOrElse((queue ->
                         issueRepository.findById(issueId).ifPresentOrElse(issue ->
                                 issue.setQueueEntity(queue),
                                 () -> new IllegalArgumentException("Error while adding an Issue - no Issue with specified Id"))),
                 ()->new IllegalArgumentException("Error while adding an Issue - no Queue with specified Id"));
-    }
+    }*/
 
     public IssueEntity getIssue(Long id){
         if(id == null)
             return null;
         return issueRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No Issue found with id: "+id));
+    }
+
+    public List<IssueEntity> getAllWaiting(){
+        return issueRepository.findByCompletedAtIsNullOrderByCreatedAt();
     }
 
     public void startIssue(Long id){

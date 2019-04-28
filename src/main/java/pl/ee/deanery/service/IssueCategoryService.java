@@ -14,8 +14,8 @@ public class IssueCategoryService {
     @Autowired
     private IssueCategoryRepository repository;
 
-    public IssueCategoryEntity addIssueCategory(IssueCategoryEntity issueCategory){
-        return repository.save(issueCategory);
+    public Long addIssueCategory(IssueCategoryEntity issueCategory){
+        return repository.save(issueCategory).getId();
     }
 
     public List<IssueCategoryEntity> getAllIssueCategories(){

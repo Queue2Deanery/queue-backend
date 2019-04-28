@@ -10,6 +10,7 @@ import pl.ee.deanery.model.QueueEntity;
 import pl.ee.deanery.service.QueueService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,9 +31,9 @@ public class QueueController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity newQueue(@RequestBody QueueEntity entity){
-        service.addQueue(entity);
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity<Map<String, Long>> newQueue(@RequestBody QueueEntity entity){
+        Long id = service.addQueue(entity);
+        return new ResponseEntity<>(Map.of("id", id), HttpStatus.CREATED);
     }
 
     @PutMapping("/edit/{id}")

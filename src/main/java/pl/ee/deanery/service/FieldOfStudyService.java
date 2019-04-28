@@ -14,8 +14,8 @@ public class FieldOfStudyService {
     @Autowired
     private FieldOfStudyRepository repository;
 
-    public void addFieldOfStudy(FieldOfStudyEntity fieldOfStudy){
-        repository.save(fieldOfStudy);
+    public Long addFieldOfStudy(FieldOfStudyEntity fieldOfStudy){
+        return repository.save(fieldOfStudy).getId();
     }
 
     public List<FieldOfStudyEntity> getAllFieldsOfStudy(){
