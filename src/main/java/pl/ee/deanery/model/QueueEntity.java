@@ -1,15 +1,25 @@
 package pl.ee.deanery.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+
+/*
+    QueueEntity - Kolejka
+ */
+
 
 @Builder
 @Data
 @Entity
+@RequiredArgsConstructor
+@AllArgsConstructor
+//@NoArgsConstructor
 public class QueueEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,13 +32,15 @@ public class QueueEntity {
   private String shortName;
 
   @EqualsAndHashCode.Exclude
+  //@JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueEntity")
-  private Set<IssueEntity> issueEntities;
+  private List<IssueEntity> issueEntities;
 
-  public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
+  /*public Set<IssueEntity> addIssue(IssueEntity issueEntity) {
     issueEntity.setQueueEntity(this);
     issueEntities.add(issueEntity);
     return issueEntities;
-  }
+  }*/
+
 
 }

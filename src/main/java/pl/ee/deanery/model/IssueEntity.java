@@ -1,14 +1,22 @@
 package pl.ee.deanery.model;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/*
+    IssueEntity - Sprawa do Dziekanatu
+    Klasa opisująca studenta oczekującego w kolejce
+ */
+
 @Builder
 @Data
 @Entity
+@RequiredArgsConstructor
+//@NoArgsConstructor
+@AllArgsConstructor
 public class IssueEntity {
 
   @Id
@@ -25,13 +33,17 @@ public class IssueEntity {
   @Column
   private LocalDateTime completedAt;
 
-  @ManyToOne
-  private FieldOfStudyEntity fieldOfStudyEntity;
+  /*@ManyToOne
+  @JoinColumn(name = "fieldOfStudyID")
+  private FieldOfStudyEntity fieldOfStudyEntity; // queueId już jednoznacznie łączy z fieldOfStudyId
 
+*/
   @ManyToOne
+  @JoinColumn(name = "queueID")
   private QueueEntity queueEntity;
 
   @ManyToOne
+  @JoinColumn(name = "issueCategoryID")
   private IssueCategoryEntity issueCategoryEntity;
 
   @Column(nullable = false)
